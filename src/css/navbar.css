@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+
+.navBar{
+    margin-bottom: 0em;
+}
+
+.main-header{
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;
+    margin-left: 1em;
+    font-size: 1.5em;
+}
+
+.nav-link{
+    margin-left: 2em;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.navbar button{
+    margin-right: 1rem;
+}

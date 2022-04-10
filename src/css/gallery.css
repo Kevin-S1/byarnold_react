@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+
+.gallery{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.gallery-photo{
+    width: 80vw;
+}
+
+.gallery-single-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.gallery-single-photo{
+    width: 8rem;
+    height: 12.5rem;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.gallery-multiple-container-main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-multiple-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 95vw;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px dashed #70877F80;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.gallery-multi-main-photo{
+    margin-right: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.gallery-multi-secondary-photo{
+    width: 8rem;
+    height: 5.5rem;
+    margin-right: 0.5rem;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.image-set-secondary-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-description-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.image-title{
+    margin: 0.5rem 0 0 0.5rem;
+
+}
+
+.image-description{
+    margin: 0rem 0 0 0.5rem;
+    font-size: 0.9em;
+}
+
+@media screen and (min-width:1100px) {
+
+    .gallery-single-container{
+        justify-content: center;
+    }
+
+    .gallery-single-photo{
+        width: 10rem;
+        height: 15rem;
+        margin-right: 0.5rem;
+    }
+
+    .gallery-multiple-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 35vw;
+        margin-top: 0.5rem;
+        margin-right: 1rem;
+    }
+
+    .gallery-multi-main-photo{
+        width: 20rem;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .gallery-multi-secondary-photo{
+        width: 15rem;
+        height: 8rem;
+        margin-right: 0.5rem;
+    }
+}

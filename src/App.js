@@ -1,24 +1,51 @@
 import logo from './logo.svg';
 import './App.css';
+import About from './Components/About';
+import Gallery from './Components/Gallery';
+import Home from './Components/Home';
+import Admin from './Components/Admin';
+import Contact from './Components/Contact';
+import NavBar from './Components/NavBar';
+import { db, app } from './Firebase';
+import { Route, Routes } from 'react-router-dom';
+import Footer from './Components/Footer';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from "firebase/firestore";
 
 function App() {
+
+  const [images, setImages] = useState([])
+
+  const getImages = async () => {
+    const querySnapshot = await getDocs(collection(db, "gallery-items"))
+    .then(snapshot => snapshot.forEach((doc) => {
+      setImages(prev => [...prev, doc.data()]);
+    }));
+  }
+
+  useEffect( async () => {
+    await getImages();
+  }, [])
+
+  useEffect( async () => {
+    console.log(images)
+  }, [images])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+
+      <Routes>
+        <Route path='/admin' element={ <Admin images={ images }/> } ></Route>
+        <Route path='/gallery' element={ <Gallery images={ images }/> } ></Route>
+        <Route path='/contact' element={ <Contact /> }></Route>
+        <Route path='/about' element={ <About /> }></Route>
+        <Route path='/' element={ <Home /> }></Route>
+        
+      </Routes>
+      <Footer />
+    
+    </>
   );
 }
 

@@ -7,6 +7,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root{
+  background-image: linear-gradient(to right bottom, #f8f8fb, #f6f6f8, #f5f4f6, #f3f2f3, #f1f0f1, #eeeeee, #ecebec, #e9e9e9, #e5e5e6, #e1e1e2, #dddedf, #d9dadc);
+  padding-bottom: 10em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

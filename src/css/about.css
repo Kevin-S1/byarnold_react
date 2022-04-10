@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+
+.About{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-text{
+    margin-left: 1em;
+    margin-right: 1em;
+    font-family: 'Titillium Web', sans-serif;
+    font-style: italic;
+    border: 2px dashed #70877F80;
+    padding: 2em;
+}
+
+.about-image{
+    width:80vw;
+    height: 20em;
+    object-fit: cover;
+    margin-bottom: 2em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (min-width:800px) {
+
+    .about-image{
+        margin-top: 2em;
+        margin-left: 2em;
+        margin-right: 1em;
+        width:80vw;
+        height: 30em;
+        object-fit: cover;
+        margin-bottom: 2em;
+    }
+    .about-text{
+        width: 50vw;
+        margin-left: 0em;
+        margin-right: 1em;
+        font-family: 'Titillium Web', sans-serif;
+        font-style: italic;
+    }
+}
+
+@media screen and (min-width:1100px) {
+    .About{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .about-image{
+        margin-top: 0em;
+        margin-left: 0em;
+        margin-right: 2em;
+        width: 30em;
+        height: 45em;
+        object-fit: cover;
+        margin-bottom: 0em;
+    }
+    .about-text{
+        text-align: justify;
+        width: 30em;
+        height: 45em;
+        margin-left: 1em;
+        margin-right: 1em;
+        font-family: 'Titillium Web', sans-serif;
+        font-style: italic;
+    }
+    .about-header{
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    .about-paragraph{
+        font-size: 1.2rem;
+    }
+}
