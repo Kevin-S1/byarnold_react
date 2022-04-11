@@ -32,6 +32,13 @@
     display: none !important;
 }
 
+.about-header{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #21666b;
+}
+
 @media screen and (min-width:760px) {
     .about-image{
         margin-top: 2em;
@@ -85,12 +92,7 @@
         font-family: 'Titillium Web', sans-serif;
         font-style: italic;
     }
-    .about-header{
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
-        color: #21666b;
-    }
+    
     .about-paragraph{
         font-size: 1rem;
     }
