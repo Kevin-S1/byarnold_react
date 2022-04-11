@@ -4,7 +4,7 @@ function About() {
     return (
       <>
         <div className="About">
-            <img className='about-image' src={require('../media/arnold2.jpg')}/>
+        <img className='about-image about-image_left' src={require('../media/arnold2.jpg')}/>
         <article className="about-text">
             <h2 className='about-header'>Over ByArnold:</h2>
             <p className='about-paragraph'>
@@ -17,6 +17,7 @@ function About() {
             </p>
         
         </article>
+        <img className='about-image about-image_right' src={require('../media/arnold2.jpg')}/>
         </div>
       
       </>

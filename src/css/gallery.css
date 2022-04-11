@@ -86,12 +86,14 @@
     font-weight: 600;
     margin: 0 0 0.5rem 0;
     width: 20rem;
+    color: #21666b;
 }
 
 .image-description{
     font-family: 'Titillium Web', sans-serif;
     margin: 0rem 0 0 0.5rem;
     font-size: 0.9em;
+    color: #21666b;
 }
 
 @media screen and (min-width:760px) {

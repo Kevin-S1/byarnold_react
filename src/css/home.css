@@ -11,6 +11,12 @@ a{
     text-decoration: none;
   }
 
+  .home-logo_large{
+      display: none !important;
+      margin: 0rem 0 0 3rem;
+      width: 15rem;
+  }
+
   .home-header{
     font-family: 'Titillium Web', sans-serif;
     font-weight: 700;
@@ -31,10 +37,6 @@ a{
     margin-bottom: 2rem;
     font-size: 1.5em;
     display: none;
-}
-
-.home-logo{
-    width: 25rem;
 }
 
 .home-item-container{
@@ -99,7 +101,7 @@ a{
     font-size: 1.5em;
 }
 
-@media screen and (min-width:760px) {
+@media screen and (min-width:769px) {
     .home_image_text{
         bottom: 1.5em;
         right: 4em;
@@ -133,13 +135,17 @@ a{
     .home_image{
         margin-top: 2rem;
         width: 40vw;
-        height: 25em;
+        height: 35em;
+    }
+
+    .home-logo_large{
+        display: inline !important;
     }
 
     .home_image_wide{
         margin-top: 0;
         width: 50vw;
-        height: 15em;
+        height: 20em;
     }
 
     .home-social-container{
@@ -177,7 +183,11 @@ a{
         width: 50em;
         height: 20em;
     }
-
+    .home-logo_large{
+        margin: 1rem 0 0 0;
+        display: inline !important;
+        width: 25rem;
+    }
     .home-social-container{
         display: flex;
         flex-direction: row;

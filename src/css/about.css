@@ -24,6 +24,14 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.about-image_left{
+    display: block !important;
+}
+
+.about-image_right{
+    display: none !important;
+}
+
 @media screen and (min-width:760px) {
     .about-image{
         margin-top: 2em;
@@ -41,6 +49,7 @@
         font-family: 'Titillium Web', sans-serif;
         font-style: italic;
     }
+
 }
 
 @media screen and (min-width:1000px) {
@@ -58,6 +67,15 @@
         object-fit: cover;
         margin-bottom: 0em;
     }
+
+    .about-image_left{
+        display: none !important;
+    }
+
+    .about-image_right{
+        display: block !important;
+        height: 35rem;
+    }
     .about-text{
         text-align: justify;
         width: 30em;
@@ -70,6 +88,8 @@
     .about-header{
         font-size: 2rem;
         margin-bottom: 1rem;
+        font-weight: 600;
+        color: #21666b;
     }
     .about-paragraph{
         font-size: 1rem;
