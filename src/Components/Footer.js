@@ -7,18 +7,18 @@ function Footer() {
       <>
         <div className="footer">
             <div className="footer-social">
-            <a href='#'>
+            <a href='https://www.instagram.com/byarnold.design/'>
                 <FaInstagram className='footer-social-icon' />
             </a>
-            <a href=''>
+            <a href='https://www.facebook.com/ArnoldByArnold/'>
                 <FaFacebook className='footer-social-icon'/>
             </a>
-            <a href=''>
+            {/* <a href=''>
                 <FaPinterest className='footer-social-icon'/>
             </a>
             <a href=''>
                 <FaEtsy className='footer-social-icon'/>
-            </a>
+            </a> */}
             </div>
             <h4 className="footer-text footer-text_bold">BYARNOLD</h4>
             <div className="footer-text-container">

@@ -73,7 +73,6 @@ function Admin() {
       e.preventDefault();
       setLoading(true);
       if(e.target[0].value === '' || e.target[0].value === undefined) { setFail(!fail); setLoading(false); return;}
-      if(e.target[1].value === '' || e.target[1].value === undefined) { setFail(!fail); setLoading(false); return;}
       if(e.target[2].files[0] === '' || e.target[2].files[0] === undefined) {setFail(!fail); setLoading(false); return;}
       const id = "id" + Math.random().toString(16).slice(2)
       let mainDownloadUrl = '';
@@ -198,10 +197,10 @@ function Admin() {
           <p>Upload hier meerdere foto's met een titel en beschrijving.</p>
           {loading ? <div className='loading-box'>Uploaden...</div> : 
           <form className='admin-form' onSubmit={e => multipleFileHandler(e)}>
-            <label className='admin-form-label' htmlFor='name'><b>Titel (naam van item):</b></label>
-            <input id='name' className='admin-form-input' type='text'></input>
-            <label className='admin-form-label' htmlFor='description'><b>Beschrijving:</b></label>
-            <textarea id='description' className='admin-form-input' rows='10' cols='30' ></textarea>
+            <label className='admin-form-label' htmlFor='name'><b>Titel* (Verplicht):</b></label>
+            <input id='name' className='admin-form-input' type='text' placeholder='Titel (Verplicht)'></input>
+            <label className='admin-form-label' htmlFor='description'>Beschrijving:</label>
+            <textarea id='description' className='admin-form-input' rows='10' cols='30' placeholder='Beschrijving (Optioneel)' ></textarea>
             <label htmlFor='image1'><b>1e foto* (Verplicht)</b></label>
             <input type="file" id="image1" name="filename"></input>
             <label htmlFor='image2'>2e foto</label>

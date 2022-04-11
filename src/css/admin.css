@@ -93,10 +93,12 @@
 .admin-overview-menu{
     display: flex;
     flex-direction: column;
+    width: 30rem;
     justify-content: center;
     align-items: center;
 }
 .admin-overview-text-container{
+    width: 30rem;
     display: flex;
     flex-direction: column;
 }

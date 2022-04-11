@@ -9,7 +9,7 @@ function Gallery(props) {
         <>
             <div className='gallery-single-container'>
               {props.images.filter((image)=> image.type === 'single-image' ).map((image) => 
-                  <Fancybox options={{ infinite: false }}>
+                  <Fancybox className='main-image-container' options={{ infinite: false }}>
                   <a
                       data-fancybox="responsive"
                       data-src={image.mainPhoto}
@@ -23,13 +23,16 @@ function Gallery(props) {
             <div className='gallery-multiple-container-main'>
               {props.images.filter((image) => image.type === 'image-set').map((image) => 
                   <div className='gallery-multiple-container'>
+                      <h4 className='image-title'>{image.title}</h4>
                       <Fancybox options={{ infinite: false }}>
                         <a
                             data-fancybox="responsive"
                             data-src={image.mainPhoto}
+                            data-caption={image.description}
                             data-sizes="(max-width: 600px) 480px, 800px"
                             >
-                            <img className='gallery-multi-main-photo' src={image.mainPhoto} width="200" height="300" />
+                            <img className='gallery-multi-main-photo' src={image.mainPhoto} />
+                            
                         </a>
                         <div className='image-set-secondary-container'>
                             {image.secondPhoto !== '' ? 
@@ -37,6 +40,7 @@ function Gallery(props) {
                                 data-fancybox="responsive"
                                 data-src={image.secondPhoto}
                                 data-sizes="(max-width: 600px) 480px, 800px"
+                                data-caption={image.description}
                                 >
                                 <img className='gallery-multi-secondary-photo' src={image.secondPhoto} width="200" height="300" />
                             </a> : <></>}
@@ -45,6 +49,7 @@ function Gallery(props) {
                                 data-fancybox="responsive"
                                 data-src={image.secondPhoto}
                                 data-sizes="(max-width: 600px) 480px, 800px"
+                                data-caption={image.description}
                                 >
                                 <img className='gallery-multi-secondary-photo' src={image.thirdPhoto} width="200" height="300" />
                             </a> : <></>}
@@ -53,6 +58,7 @@ function Gallery(props) {
                                 data-fancybox="responsive"
                                 data-src={image.secondPhoto}
                                 data-sizes="(max-width: 600px) 480px, 800px"
+                                data-caption={image.description}
                                 >
                                 <img className='gallery-multi-secondary-photo' src={image.fourthPhoto} width="200" height="300" />
                             </a> : <></>}
@@ -68,11 +74,9 @@ function Gallery(props) {
                         
                       </Fancybox>
                       <div className='image-description-container'>
-                          <h5 className='image-title'>{image.title}</h5>
-                          <p className='image-description'>{image.description}</p>
+                        <h6 className='image-description'>{image.description}</h6>  
                       </div>
-
-
+                      
                   </div>
                   
               )}

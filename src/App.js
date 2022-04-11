@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import About from './Components/About';
 import Gallery from './Components/Gallery';
@@ -41,7 +40,6 @@ function App() {
         <Route path='/contact' element={ <Contact /> }></Route>
         <Route path='/about' element={ <About /> }></Route>
         <Route path='/' element={ <Home /> }></Route>
-        
       </Routes>
       <Footer />
     

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/home.css';
 import { FaFacebook, FaInstagram, FaPinterest, FaEtsy } from 'react-icons/fa';
+import logo from '../media/byarnold_logo.png';
 
 function Home() {
   return (
@@ -26,18 +27,18 @@ function Home() {
                     </Link>
                 </div>
                 <div className='home-social-container'>
-                    <a href='#'>
+                    <a href='https://www.instagram.com/byarnold.design/'>
                         <FaInstagram className='home-social-icon' />
                     </a>
-                    <a href=''>
+                    <a href='https://www.facebook.com/ArnoldByArnold/'>
                         <FaFacebook className='home-social-icon'/>
                     </a>
-                    <a href=''>
+                    {/* <a href=''>
                         <FaPinterest className='home-social-icon'/>
                     </a>
                     <a href=''>
                         <FaEtsy className='home-social-icon'/>
-                    </a>
+                    </a> */}
                 
                 </div>
                 <div className='home-item-container '>

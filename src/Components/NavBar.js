@@ -1,14 +1,16 @@
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import '../css/navbar.css'
+import logo from '../media/byarnold_logo__small_full.png'
 
 function NavBar() {
     return (
       <>
         <div className='navBar'>
             <Navbar collapseOnSelect expand="lg">
-            <Navbar.Brand as={Link} to="/">
-                <h1 className='main-header'>BYARNOLD</h1>
+            <Navbar.Brand className="nav-brand-container" as={Link} to="/">
+              <img className="nav-logo" src={logo} typeof='image/png'/>
+              <h1 className='main-header'>BYARNOLD</h1>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse className="navbar-collapse" id="responsive-navbar-nav">
