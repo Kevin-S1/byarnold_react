@@ -26,10 +26,6 @@ function App() {
     await getImages();
   }, [])
 
-  useEffect( async () => {
-    console.log(images)
-  }, [images])
-
   return (
     <>
       <NavBar />

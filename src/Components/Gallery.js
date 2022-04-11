@@ -47,7 +47,7 @@ function Gallery(props) {
                             {image.thirdPhoto !== '' ? 
                             <a
                                 data-fancybox="responsive"
-                                data-src={image.secondPhoto}
+                                data-src={image.thirdPhoto}
                                 data-sizes="(max-width: 600px) 480px, 800px"
                                 data-caption={image.description}
                                 >
@@ -56,7 +56,7 @@ function Gallery(props) {
                             {image.fourthPhoto !== '' ? 
                             <a
                                 data-fancybox="responsive"
-                                data-src={image.secondPhoto}
+                                data-src={image.fourthPhoto}
                                 data-sizes="(max-width: 600px) 480px, 800px"
                                 data-caption={image.description}
                                 >
@@ -65,7 +65,7 @@ function Gallery(props) {
                             {image.fifthPhoto !== '' ? 
                             <a
                                 data-fancybox="responsive"
-                                data-src={image.secondPhoto}
+                                data-src={image.fifthPhoto}
                                 data-sizes="(max-width: 600px) 480px, 800px"
                                 >
                                 <img className='gallery-multi-secondary-photo' src={image.fifthPhoto} width="200" height="300" />
