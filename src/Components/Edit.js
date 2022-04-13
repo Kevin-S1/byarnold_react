@@ -1,8 +1,10 @@
 
 import { useEffect, useState, useRef } from 'react';
-import { collection, getDocs, query, where, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db, auth } from '../Firebase';
+import { storage, db } from '../Firebase';
+import { MdDeleteForever } from 'react-icons/md';
+import { Modal, Button } from 'react-bootstrap';
 import '../css/edit.css';
 
 
@@ -21,6 +23,18 @@ function Edit({image}) {
     const [secondPhotoURL, setSecondPhotoURL] = useState(image.secondPhoto);
     const [thirdPhotoURL, setThirdPhotoURL] = useState(image.thirdPhoto);
     const [fourthPhotoURL, setFourthPhotoURL] = useState(image.fourthPhoto);
+
+    const [show, setShow] = useState(false);
+    const [activeItem, setActiveItem] = useState();
+    const [activePhoto, setActivePhoto] = useState();
+
+    const handleClose = () => setShow(false);
+
+    const handleShow = (image, imageNo) => {
+      setActiveItem(image);
+      setActivePhoto(imageNo);
+      setShow(true);
+    }
 
     const uploadFile = async () => {
       if(image.type === 'single-image') {
@@ -81,6 +95,64 @@ function Edit({image}) {
       return;
     }
 
+    const imageDeleteHandler = async (e, image, photoNo) => {
+      e.preventDefault();
+      switch (photoNo) {
+        case 2 : {
+          setSecondPhoto('');
+          setSecondPhotoURL('');
+          await setDoc(doc(db, "gallery-items", image.id), {
+            id: image.id,
+            title: title,
+            description: description,
+            mainPhoto: mainPhotoURL.toString(),
+            secondPhoto: '',
+            thirdPhoto: thirdPhotoURL.toString(),
+            fourthPhoto: fourthPhotoURL.toString(),
+            type: image.type,
+            uploadDate: image.uploadDate
+          });
+          setUpdate(!update);
+          break;
+        }
+
+        case 3 : {
+          setThirdPhoto('');
+          setThirdPhotoURL('');
+          await setDoc(doc(db, "gallery-items", image.id), {
+            id: image.id,
+            title: title,
+            description: description,
+            mainPhoto: mainPhotoURL.toString(),
+            secondPhoto: secondPhotoURL.toString(),
+            thirdPhoto: '',
+            fourthPhoto: fourthPhotoURL.toString(),
+            type: image.type,
+            uploadDate: image.uploadDate
+          });
+          setUpdate(!update);
+          break;
+        }
+        case 4 : {
+          setFourthPhoto('');
+          setFourthPhotoURL('');
+          await setDoc(doc(db, "gallery-items", image.id), {
+            id: image.id,
+            title: title,
+            description: description,
+            mainPhoto: mainPhotoURL.toString(),
+            secondPhoto: secondPhotoURL.toString(),
+            thirdPhoto: thirdPhotoURL.toString(),
+            fourthPhoto: '',
+            type: image.type,
+            uploadDate: image.uploadDate
+          });
+          setUpdate(!update);
+          break;
+        }
+      }
+    }
+
     useEffect(() => {
       if (didMountRef.current) {
         uploadFile();
@@ -100,25 +172,68 @@ function Edit({image}) {
           <label>Beschrijving:</label>
           <textarea rows={6} className='edit-input' type='text' value={description} onChange={e => setDescription(e.target.value)} />
         </form> : <></>}
-        
         <div className='edit-images'>
             <label><b>1e Foto:</b></label>
             <img className='edit-image edit-image-main' src={mainPhotoURL}/>
             <input className='edit-input' type='file' onChange={e => setMainPhoto(e.target.files[0])} />
             {image.type === 'image-set' ?
             <>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title> Verwijder Foto.</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {activePhoto === 2 ?
+                  <img src={activeItem?.secondPhoto} width='50px'/> :
+                  activePhoto === 3 ?
+                  <img src={activeItem?.thirdPhoto} width='50px'/> :
+                  <img src={activeItem?.fourthPhoto} width='50px'/>
+                  }
+                  <br></br>
+                  Weet je zeker dat je deze foto wilt verwijderen?
+                  Je kan dit niet ongedaan maken.
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Nee, ga terug
+                  </Button>
+                  <Button variant="primary" onClick={e => imageDeleteHandler(e, activeItem, activePhoto)}>
+                    Ja, Verwijder foto.
+                  </Button>
+                </Modal.Footer>
+              </Modal>
               <label>2e Foto:</label>
-              <img className='edit-image' src={secondPhotoURL}/>
-              <input className='edit-input' type='file' onChange={e => setSecondPhoto(e.target.files[0])} />
+              <div className='edit-image-container'>
+                <img className='edit-image' src={secondPhotoURL}/>
+                  {secondPhotoURL !== '' ? 
+                      <button className='delete-image-button' onClick={() => handleShow(image, 2)}>
+                        <MdDeleteForever />
+                      </button>
+                    :<></>}
+                <input className='edit-input' type='file' onChange={e => handleShow(e.target.files[0])} />
+              </div>
               <label>3e Foto:</label>
-              <img className='edit-image' src={thirdPhotoURL}/>
-              <input className='edit-input' type='file' onChange={e => setThirdPhoto(e.target.files[0])} />
+              <div className='edit-image-container'>
+                <img className='edit-image' src={thirdPhotoURL}/>
+                {thirdPhotoURL !== '' ? 
+                  <button className='delete-image-button' onClick={() => handleShow(image,  3)}>
+                    <MdDeleteForever />
+                  </button>
+                :<></>}
+                <input className='edit-input' type='file' onChange={e => setThirdPhoto(e.target.files[0])} />
+              </div>
               <label>4e Foto:</label>
-              <img className='edit-image' src={fourthPhotoURL}/>
-              <input className='edit-input' type='file' onChange={e => setFourthPhoto(e.target.files[0])} />
+              <div className='edit-image-container'>
+                <img className='edit-image' src={fourthPhotoURL}/>
+                {fourthPhotoURL !== '' ? 
+                  <button className='delete-image-button' onClick={() => handleShow(image, 4)}>
+                    <MdDeleteForever />
+                  </button>
+                :<></>}
+                <input className='edit-input' type='file' onChange={e => setFourthPhoto(e.target.files[0])} />
+              </div>
             </>
             : <></>}
-            
         </div>  
         <button className='admin-submit-button' onClick={e => saveHandler(e)}>Opslaan</button>
       </div>
