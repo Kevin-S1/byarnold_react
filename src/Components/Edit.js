@@ -180,7 +180,7 @@ function Edit({image}) {
             <>
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                  <Modal.Title> Verwijder Foto.</Modal.Title>
+                  <Modal.Title>Verwijder Foto</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   {activePhoto === 2 ?

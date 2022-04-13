@@ -40,6 +40,7 @@
     border: 1px solid red;
     height: 2rem;
 }
+
 .delete-image-button:hover{
     background-color: lightcoral !important;
     border: 2px solid red;
