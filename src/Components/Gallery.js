@@ -62,14 +62,6 @@ function Gallery(props) {
                                 >
                                 <img className='gallery-multi-secondary-photo' src={image.fourthPhoto} width="200" height="300" />
                             </a> : <></>}
-                            {image.fifthPhoto !== '' ? 
-                            <a
-                                data-fancybox="responsive"
-                                data-src={image.fifthPhoto}
-                                data-sizes="(max-width: 600px) 480px, 800px"
-                                >
-                                <img className='gallery-multi-secondary-photo' src={image.fifthPhoto} width="200" height="300" />
-                            </a> : <></>}
                         </div>
                         
                       </Fancybox>

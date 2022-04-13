@@ -1,12 +1,15 @@
 import '../css/admin.css'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db, auth } from '../Firebase';
+import Edit from './Edit';
+import {Modal, Button, NavItem} from 'react-bootstrap'
 import { useEffect, useState, useRef } from 'react';
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { collection, getDocs, query, where, deleteDoc, doc, setDoc } from "firebase/firestore";
 
 function Admin() {
 
+    const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [fail, setFail] = useState(false);
@@ -15,9 +18,20 @@ function Admin() {
     const [user, setUser] = useState(''); 
     const didMountRef = useRef(false);
     const [images, setImages] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [updatedImages, setUpdatedImages] = useState(false);
+    const [activeItem, setActiveItem] = useState();
+
+
+    const handleClose = () => setShow(false);
+    const handleShow = (image) => {
+      setActiveItem(image);
+      setShow(true);
+    }
 
     const getImages = async () => {
-      const querySnapshot = await getDocs(collection(db, "gallery-items"))
+      setImages([]);
+      await getDocs(collection(db, "gallery-items"))
       .then(snapshot => snapshot.forEach((doc) => {
         setImages(prev => [...prev, doc.data()]);
       }));
@@ -31,10 +45,13 @@ function Admin() {
       querySnapshot.forEach(async (docs) => {
         await deleteDoc(doc(db, "gallery-items", docs.id));
       })
-      setTimeout(() => {
-        window.location.reload();
-      }, 500)
-      
+      setUpdatedImages(!updatedImages);
+      handleClose();
+    }
+
+    const editHandler = (e, image) => {
+      e.preventDefault();
+      setEdit(!edit);
     }
 
     const loginHandler = (e) => {
@@ -58,15 +75,14 @@ function Admin() {
       mainDownloadUrl = await getDownloadURL(firstSnapshot.ref);
 
       await setDoc(doc(db, "gallery-items", id), {
+        id: id.toString(),
         mainPhoto: mainDownloadUrl.toString(),
         type: 'single-image',
         uploadDate: new Date()
       });
       setLoading(false);
       setSuccess(!success);
-      setTimeout(() => {
-        window.location.reload();
-      }, 500)
+      setUpdatedImages(!updatedImages);
     }
 
     const multipleFileHandler = async (e) => {
@@ -118,6 +134,7 @@ function Admin() {
       }
       
       await setDoc(doc(db, "gallery-items", id), {
+        id: id.toString(),
         title: e.target[0].value,
         description: e.target[1].value,
         mainPhoto: mainDownloadUrl.toString(),
@@ -132,9 +149,7 @@ function Admin() {
       console.log('Successfully uploaded file')
       setLoading(false);
       setSuccess(!success);
-      setTimeout(() => {
-        window.location.reload();
-      }, 500)
+      setUpdatedImages(!updatedImages);
     }
 
     useEffect(() => {
@@ -145,6 +160,10 @@ function Admin() {
         }, 5000)
       }
     }, [success])
+
+    useEffect(() => {
+      getImages();
+    },[updatedImages])
 
     useEffect(() => {
       if(didMountRef.current) {
@@ -158,10 +177,6 @@ function Admin() {
     setTimeout(() => {
       didMountRef.current = true;
     }, 500)
-
-    useEffect(() => {
-      getImages();
-    }, [])
 
     return (
       <>
@@ -214,16 +229,39 @@ function Admin() {
         </div>
         <div className='admin-overview-menu'>
           <h4 className='admin-header'>Foto's in Gallerij</h4>
-          {images.map((image) => 
+          {images.sort((a,b) => (a.type > b.type) ? 1 : ((b.type > a.type) ? -1 : 0))
+          .map((image) => 
           <div className='admin-overview-item'>
+            <button onClick={(e => editHandler(e, image))} className='button-neutral'>Bewerken</button>
             <img className='admin-overview-image' src={image.mainPhoto}/>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title> Verwijder item uit gallerij.</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {activeItem.title !== '' || activeItem.title !== undefined ?
+                <h6>{activeItem.title}</h6> : <></>}
+                <img src={activeItem.mainPhoto} width='50px'/>
+                <br></br>
+                Weet je zeker dat je dit item wilt verwijderen?
+                Je kan dit niet ongedaan maken.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Nee, ga terug
+                </Button>
+                <Button variant="primary" onClick={e => deleteHandler(e, activeItem)}>
+                  Ja, Verwijder item.
+                </Button>
+              </Modal.Footer>
+            </Modal>
             <div className='admin-overview-text-container'>
               <h6>{image.title}</h6>
               <p className='admin-overview-description'>{image.description}</p>
               <h6 className='text-bold-small'>{image.type}</h6>
-              <h6 className='text-bold-small'>{new Date(image.uploadDate * 1000).toISOString()}</h6>
-              <button onClick={(e => deleteHandler(e, image))} className='delete-button'>VERWIJDER</button>
+              <button onClick={() => handleShow(image)} className='delete-button'>VERWIJDER</button>
             </div>
+            {edit ? <Edit image={image} /> : <></>}
           </div>)}
         </div>
       </div> :
