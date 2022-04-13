@@ -29,3 +29,12 @@
     width: 90vw;
     margin-bottom: 0.5rem;
 }
+
+@media screen and (min-width: 1000px) {
+    .edit-container{
+        width: 30vw;
+    }
+    .edit-input{
+        width: 25vw;
+    }
+}

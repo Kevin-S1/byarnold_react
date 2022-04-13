@@ -16,7 +16,7 @@ function App() {
   const [images, setImages] = useState([])
 
   const getImages = async () => {
-    const querySnapshot = await getDocs(collection(db, "gallery-items"))
+    await getDocs(collection(db, "gallery-items"))
     .then(snapshot => snapshot.forEach((doc) => {
       setImages(prev => [...prev, doc.data()]);
     }));

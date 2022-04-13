@@ -176,4 +176,16 @@
         flex-direction: row;
         justify-content: space-around;
     }
+    .admin-left-menu{
+        width: 25vw;
+    }
+    .admin-right-menu{
+        width: 35vw;
+    }
+    .admin-overview-menu{
+        width: 30vw;
+    }
+    .admin-overview-item{
+        width: 30vw;
+    }
 }

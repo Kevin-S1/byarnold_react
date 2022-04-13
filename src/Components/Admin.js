@@ -95,7 +95,6 @@ function Admin() {
       let secondDownloadUrl = '';
       let thirdDownloadUrl = '';
       let fourthDownloadUrl = '';
-      let fifthDownloadUrl = '';
 
       const storageRef = ref(storage, e.target[2].files[0].name);
       const firstSnapshot = await uploadBytes(storageRef, e.target[2].files[0]);
@@ -124,14 +123,6 @@ function Admin() {
       } catch (error) {
         console.log(error)
       }
-
-      try {
-        const secondStorageRef = ref(storage, e.target[6].files[0].name);
-        const fifthSnapshot = await uploadBytes(secondStorageRef, e.target[6].files[0]);
-        fifthDownloadUrl = await getDownloadURL(fifthSnapshot.ref);
-      } catch (error) {
-        console.log(error)
-      }
       
       await setDoc(doc(db, "gallery-items", id), {
         id: id.toString(),
@@ -141,12 +132,9 @@ function Admin() {
         secondPhoto: secondDownloadUrl.toString(),
         thirdPhoto: thirdDownloadUrl.toString(),
         fourthPhoto: fourthDownloadUrl.toString(),
-        fifthPhoto: fifthDownloadUrl.toString(),
         uploadDate: new Date(),
         type: 'image-set',
       });
-
-      console.log('Successfully uploaded file')
       setLoading(false);
       setSuccess(!success);
       setUpdatedImages(!updatedImages);
@@ -239,9 +227,9 @@ function Admin() {
                 <Modal.Title> Verwijder item uit gallerij.</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                {activeItem.title !== '' || activeItem.title !== undefined ?
-                <h6>{activeItem.title}</h6> : <></>}
-                <img src={activeItem.mainPhoto} width='50px'/>
+                {activeItem?.title !== '' || activeItem?.title !== undefined ?
+                <h6>{activeItem?.title}</h6> : <></>}
+                <img src={activeItem?.mainPhoto} width='50px'/>
                 <br></br>
                 Weet je zeker dat je dit item wilt verwijderen?
                 Je kan dit niet ongedaan maken.

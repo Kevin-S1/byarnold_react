@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { collection, getDocs, query, where, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db, auth } from '../Firebase';
@@ -7,6 +7,7 @@ import '../css/edit.css';
 
 
 function Edit({image}) {
+    const didMountRef = useRef(false);
     const [update, setUpdate] = useState(false);
 
     const [title, setTitle] = useState(image.title);
@@ -19,11 +20,9 @@ function Edit({image}) {
     const [mainPhotoURL, setMainPhotoURL] = useState(image.mainPhoto);
     const [secondPhotoURL, setSecondPhotoURL] = useState(image.secondPhoto);
     const [thirdPhotoURL, setThirdPhotoURL] = useState(image.thirdPhoto);
-    const [fourthPhotoURL, setFourthPhotoURL] = useState(image.thirdPhoto);
+    const [fourthPhotoURL, setFourthPhotoURL] = useState(image.fourthPhoto);
 
     const uploadFile = async () => {
-      console.log(fourthPhotoURL);
-
       if(image.type === 'single-image') {
         const firstStorageRef = ref(storage, mainPhoto.name );
         const firstSnapshot = await uploadBytes(firstStorageRef, mainPhoto);
@@ -50,11 +49,13 @@ function Edit({image}) {
 
     const saveHandler = async (e) => {
       e.preventDefault();
-      console.log(fourthPhotoURL);
       if (image.type === 'single-image' && mainPhoto !== '') {
         await uploadFile();
         return;
       }
+
+      console.log(thirdPhoto);
+      console.log(fourthPhoto);
 
       if(mainPhoto !== '') {
         const firstStorageRef = ref(storage, mainPhoto.name );
@@ -81,8 +82,14 @@ function Edit({image}) {
     }
 
     useEffect(() => {
-      uploadFile();
+      if (didMountRef.current) {
+        uploadFile();
+      }
     }, [update])
+
+    setTimeout(() => {
+      didMountRef.current = true;
+    }, 500)
 
     return (
       <div className='edit-container'>
