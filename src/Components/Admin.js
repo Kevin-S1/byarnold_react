@@ -1,23 +1,22 @@
-import '../css/admin.css'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db, auth } from '../Firebase';
 import Edit from './Edit';
-import {Modal, Button} from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
 import { useEffect, useState, useRef } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { collection, getDocs, query, where, deleteDoc, doc, setDoc } from "firebase/firestore";
+import '../css/admin.css'
 
 function Admin() {
 
     const didMountRef = useRef(false);
-
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [fail, setFail] = useState(false);
     const [successMessage, setSuccessMessage] = useState(false);
     const [failMessage, setFailMessage] = useState(false);
-    const [user, setUser] = useState(''); 
+    const [authenticated, setAuthenticated] = useState(false); 
     const [images, setImages] = useState([]);
     const [edit, setEdit] = useState(false);
     const [updatedImages, setUpdatedImages] = useState(false);
@@ -57,9 +56,7 @@ function Admin() {
 
     const loginHandler = (e) => {
         e.preventDefault();
-        if(e.target[0].value === 'arnold@byarnold.com' || e.target[0].value === 'kevinsips@protonmail.com') {
-          signInWithEmailAndPassword(auth, e.target[0].value, e.target[1].value).then((userCredentials) => setUser(userCredentials.user.email));
-        }
+        signInWithEmailAndPassword(auth, e.target[0].value, e.target[1].value).then(() => setAuthenticated(true));
     }
 
     const singleFileHandler = async (e) => {
@@ -101,6 +98,7 @@ function Admin() {
         setLoading(false);
         return;
       }
+
       const id = "id" + Math.random().toString(16).slice(2)
       let mainDownloadUrl = '';
       let secondDownloadUrl = '';
@@ -156,7 +154,7 @@ function Admin() {
         setSuccessMessage(true);
         setTimeout(() => {
           setSuccessMessage(false)
-        }, 5000)
+        }, 4000)
       }
     }, [success])
 
@@ -169,7 +167,7 @@ function Admin() {
         setFailMessage(true);
         setTimeout(() => {
           setFailMessage(false)
-        }, 5000)
+        }, 4000)
       }
     }, [fail])
 
@@ -179,7 +177,7 @@ function Admin() {
 
     return (
       <>
-      {user === 'arnold@byarnold.com' || user === 'kevinsips@protonmail.com' ? 
+      {authenticated ? 
         <></>
         : 
           <div className='login-container'>
@@ -191,7 +189,7 @@ function Admin() {
               <input className='admin-form-input admin-submit-button admin-submit-button_small' type='submit' value='Log In' ></input>
             </form>
           </div> }
-      {user === 'arnold@byarnold.com' || user === 'kevinsips@protonmail.com' ?   
+      {authenticated ?   
       <div className="admin">
         <div className='admin-left-menu'>
           <h4 className='admin-header-sub'>Upload losse foto</h4>
@@ -208,7 +206,7 @@ function Admin() {
           <h4 className='admin-header-sub'>Upload meerdere foto's</h4>
           {failMessage ? <div className='fail-box'>Upload niet gelukt! Check input.</div> : <></>}
           {successMessage ? <div className='success-box'>Upload gelukt! :)</div> : <></>}
-          <p>Upload hier meerdere foto's met een titel en beschrijving. Alleen .jpg, .jpeg, .png bestanden, geen filmpjes!</p>
+          <p>Upload hier meerdere foto's met een titel en beschrijving. Alleen .jpg, .jpeg, .png bestanden.</p>
           {loading ? <div className='loading-box'>Uploaden...</div> : 
           <form className='admin-form' onSubmit={e => multipleFileHandler(e)}>
             <label className='admin-form-label' htmlFor='name'><b>Titel* (Verplicht):</b></label>

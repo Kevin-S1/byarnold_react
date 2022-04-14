@@ -13,10 +13,10 @@ function Footer() {
             <a href='https://www.facebook.com/ArnoldByArnold/'>
                 <FaFacebook className='footer-social-icon'/>
             </a>
-            {/* <a href=''>
+            <a href='https://www.pinterest.com/ByArnoldB/'>
                 <FaPinterest className='footer-social-icon'/>
             </a>
-            <a href=''>
+            {/* <a href=''>
                 <FaEtsy className='footer-social-icon'/>
             </a> */}
             </div>
