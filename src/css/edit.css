@@ -19,6 +19,11 @@
     margin-bottom: 0.5rem;
 }
 
+.edit-image-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .edit-images{
     display: flex;
     flex-direction: column;
@@ -28,6 +33,22 @@
 .edit-input{
     width: 90vw;
     margin-bottom: 0.5rem;
+}
+
+.delete-image-button{
+    background-color: transparent !important;
+    border: 1px solid red;
+    height: 2rem;
+}
+
+.delete-image-button:hover{
+    background-color: lightcoral !important;
+    border: 2px solid red;
+    height: 2rem;
+}
+
+.delete-image-button:hover::after{
+    content: "Verwijder Foto?";
 }
 
 @media screen and (min-width: 1000px) {

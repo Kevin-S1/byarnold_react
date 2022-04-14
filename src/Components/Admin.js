@@ -2,12 +2,14 @@ import '../css/admin.css'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db, auth } from '../Firebase';
 import Edit from './Edit';
-import {Modal, Button, NavItem} from 'react-bootstrap'
+import {Modal, Button} from 'react-bootstrap'
 import { useEffect, useState, useRef } from 'react';
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { collection, getDocs, query, where, deleteDoc, doc, setDoc } from "firebase/firestore";
 
 function Admin() {
+
+    const didMountRef = useRef(false);
 
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -16,7 +18,6 @@ function Admin() {
     const [successMessage, setSuccessMessage] = useState(false);
     const [failMessage, setFailMessage] = useState(false);
     const [user, setUser] = useState(''); 
-    const didMountRef = useRef(false);
     const [images, setImages] = useState([]);
     const [edit, setEdit] = useState(false);
     const [updatedImages, setUpdatedImages] = useState(false);
@@ -49,7 +50,7 @@ function Admin() {
       handleClose();
     }
 
-    const editHandler = (e, image) => {
+    const editHandler = (e) => {
       e.preventDefault();
       setEdit(!edit);
     }
@@ -57,8 +58,7 @@ function Admin() {
     const loginHandler = (e) => {
         e.preventDefault();
         if(e.target[0].value === 'arnold@byarnold.com' || e.target[0].value === 'kevinsips@protonmail.com') {
-          signInWithEmailAndPassword(auth, e.target[0].value, e.target[1].value).then((userCredentials) => setUser(userCredentials.user.email))
-          console.log(user);
+          signInWithEmailAndPassword(auth, e.target[0].value, e.target[1].value).then((userCredentials) => setUser(userCredentials.user.email));
         }
     }
 
