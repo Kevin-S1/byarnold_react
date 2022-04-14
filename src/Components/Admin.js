@@ -66,6 +66,12 @@ function Admin() {
       e.preventDefault();
       setLoading(true);
       if(e.target[0].files[0] === '' || e.target[0].files[0] === undefined) {setFail(!fail); setLoading(false); return;}
+      if(e.target[0].files[0].type !== 'image/jpeg' || e.target[0].files[0].type !== 'image/png') {
+        setFail(!fail);
+        setLoading(false);
+        return;
+      }
+      
       const id = "id" + Math.random().toString(16).slice(2)
       let mainDownloadUrl = '';
 
@@ -90,6 +96,11 @@ function Admin() {
       setLoading(true);
       if(e.target[0].value === '' || e.target[0].value === undefined) { setFail(!fail); setLoading(false); return;}
       if(e.target[2].files[0] === '' || e.target[2].files[0] === undefined) {setFail(!fail); setLoading(false); return;}
+      if(e.target[2].files[0].type !== 'image/jpeg' || e.target[2].files[0].type !== 'image/png') {
+        setFail(!fail);
+        setLoading(false);
+        return;
+      }
       const id = "id" + Math.random().toString(16).slice(2)
       let mainDownloadUrl = '';
       let secondDownloadUrl = '';
@@ -197,7 +208,7 @@ function Admin() {
           <h4 className='admin-header-sub'>Upload meerdere foto's</h4>
           {failMessage ? <div className='fail-box'>Upload niet gelukt! Check input.</div> : <></>}
           {successMessage ? <div className='success-box'>Upload gelukt! :)</div> : <></>}
-          <p>Upload hier meerdere foto's met een titel en beschrijving.</p>
+          <p>Upload hier meerdere foto's met een titel en beschrijving. Alleen .jpg, .jpeg, .png bestanden, geen filmpjes!</p>
           {loading ? <div className='loading-box'>Uploaden...</div> : 
           <form className='admin-form' onSubmit={e => multipleFileHandler(e)}>
             <label className='admin-form-label' htmlFor='name'><b>Titel* (Verplicht):</b></label>
@@ -254,8 +265,6 @@ function Admin() {
         </div>
       </div> :
       <></>}
-      
-      
       </>
     );
   }

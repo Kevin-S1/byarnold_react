@@ -16,8 +16,6 @@ function Contact() {
             <h6 className='contact-text-bold'><BsFillTelephoneFill /> 0627496887</h6>
         </article>
       </div>
-      
-      
       </>
     );
   }

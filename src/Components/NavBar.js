@@ -1,7 +1,7 @@
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import '../css/navbar.css'
-import logo from '../media/byarnold_logo__small_full.png'
+import logo from '../media/byarnold_logo.svg'
 
 function NavBar() {
     return (

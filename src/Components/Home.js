@@ -2,7 +2,7 @@ import {React, useState, useEffect }from 'react';
 import { Link } from 'react-router-dom';
 import '../css/home.css';
 import { FaFacebook, FaInstagram, FaPinterest, FaEtsy } from 'react-icons/fa';
-import logo from '../media/byarnold_logo.png';
+import logo from '../media/byarnold_logo.svg';
 import galleryCoverFull from '../media/gallery_cover_full.jpg';
 import galleryCoverMobile from '../media/gallery_cover_mobile.jpg';
 import contactCoverFull from '../media/contact_cover_full.JPEG';
@@ -50,10 +50,10 @@ function Home() {
                     <a href='https://www.facebook.com/ArnoldByArnold/'>
                         <FaFacebook className='home-social-icon'/>
                     </a>
-                    {/* <a href=''>
+                    <a href='https://www.pinterest.com/ByArnoldB/'>
                         <FaPinterest className='home-social-icon'/>
                     </a>
-                    <a href=''>
+                    {/* <a href=''>
                         <FaEtsy className='home-social-icon'/>
                     </a> */}
                 

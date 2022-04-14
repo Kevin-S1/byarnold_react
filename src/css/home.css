@@ -13,8 +13,8 @@ a{
 
   .home-logo_large{
       display: none !important;
-      margin: 0rem 0 0 3rem;
-      width: 15rem;
+      margin: -3rem 0rem -4rem 3rem;
+      width: 20rem;
   }
 
   .home-header{
@@ -101,7 +101,7 @@ a{
     font-size: 1.5em;
 }
 
-@media screen and (min-width:769px) {
+@media screen and (min-width:750px) {
     .home_image_text{
         bottom: 1.5em;
         right: 4em;
@@ -116,7 +116,7 @@ a{
         object-fit: cover;
     }
 
-    .home_image_wide{
+    .home_image_wide{   
         margin-top: 0;
         width: 40rem;
         height: 20em;
@@ -135,7 +135,7 @@ a{
     .home_image{
         margin-top: 2rem;
         width: 40vw;
-        height: 35em;
+        max-height: 35em;
     }
 
     .home-logo_large{
@@ -174,7 +174,7 @@ a{
     .home_image{
         margin-top: 2rem;
         width: 40em;
-        height: 40em;
+        max-height: 40rem;
     }
 
     .home_image_wide{

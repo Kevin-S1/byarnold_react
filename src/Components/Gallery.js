@@ -32,7 +32,6 @@ function Gallery(props) {
                             data-sizes="(max-width: 600px) 480px, 800px"
                             >
                             <img className='gallery-multi-main-photo' src={image.mainPhoto} />
-                            
                         </a>
                         <div className='image-set-secondary-container'>
                             {image.secondPhoto !== '' ? 
@@ -68,9 +67,7 @@ function Gallery(props) {
                       <div className='image-description-container'>
                         <h6 className='image-description'>{image.description}</h6>  
                       </div>
-                      
                   </div>
-                  
               )}
             </div>
         </>
